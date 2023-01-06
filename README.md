@@ -7,7 +7,7 @@
 
 ## START PROJECT
 
-- Download this project and save to your local
+- Download this project or clone this repo and save to your local
 - Run `composer install` to install all dependencies needed
 - Open your computer server to run your server, then create new database on your database
 - Configure your .env file, go to database section, and configure the database according to the database you are using, the user, and the password you are using as below
@@ -29,6 +29,102 @@
 - Then, you can run command `php artisan serve` to start your laravel server and try the endpoint has been build
 
 ## AUTH ENDPOINT
+
+### Register
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/register`
+- Header :
+  - Accept: application/json
+- Body :
+
+```json
+{
+    "name": "string",
+    "email": "string, email",
+    "password": "string",
+    "password_confirmation": "string"
+}
+```
+
+Response :
+
+```json
+{
+  "message": "string"
+}
+```
+
+### Login
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/login`
+- Header :
+  - Accept: application/json
+- Body :
+
+```json
+{
+    "email": "string, email",
+    "password": "string",
+}
+```
+
+Response :
+
+```json
+{
+  "access_token": "string",
+  "token_type": "string",
+  "expires_in": "integer",
+}
+```
+
+### Logout
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/logout`
+- Header :
+  - Accept: application/json
+- Query Param :
+  - token: "string"
+
+Response :
+
+```json
+{
+  "message": "string"
+}
+```
+
+### Me
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/register`
+- Header :
+  - Accept: application/json
+  - Autohorization: Bearer token
+
+Response :
+
+```json
+{
+  "id": "integer",
+  "name": "string",
+  "email": "string",
+  "email_verified_at": "string",
+  "created_at": "string",
+  "updated_at": "string"
+}
+```
 
 ## API ENDPOINT
 
