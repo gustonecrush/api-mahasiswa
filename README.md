@@ -10,7 +10,7 @@
 - Download this project or clone this repo and save to your local
 - Run `composer install` to install all dependencies needed
 - Open your computer server to run your server, then create new database on your database
-- Configure your .env file, go to database section, and configure the database according to the database you are using, the user, and the password you are using as below
+- Configure your .env file, go to database section, and configure the database according to the database you are using, the user, and the password you are using as below. If you don't make database yet, so make new database in your server. Then configure in .env file.
   ```
       DB_CONNECTION=mysql
       DB_HOST=your_host
