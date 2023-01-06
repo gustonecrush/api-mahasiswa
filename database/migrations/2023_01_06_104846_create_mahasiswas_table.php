@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('jenis_kelamin');
             $table->integer('semester');
             $table->year('angkatan');
-            $table->foreignId('kelas_id');
+            $table->foreignId('fakultas_id');
             $table->foreignId('prodi_id');
             $table->timestamps();
         });

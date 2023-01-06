@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\ProgramStudi;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class KelasResource extends JsonResource
+class FakultasResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,7 +17,8 @@ class KelasResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'kelas' => $this->kelas,
+            'fakultas' => $this->fakultas,
+            'program_studi' => ProgramStudiResource::collection($this->prodis),
         ];
     }
 }

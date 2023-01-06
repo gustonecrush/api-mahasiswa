@@ -26,7 +26,7 @@ class MahasiswaController extends Controller
     {
         $this->mahasiswas = Mahasiswa::all();
         $mahasiswaResource = MahasiswaResource::collection($this->mahasiswas);
-
+        
         return $this->sendResponse(
             $mahasiswaResource,
             'Successfully Get Mahasiswa',
@@ -76,7 +76,7 @@ class MahasiswaController extends Controller
             'jenis_kelamin' => request('jenis_kelamin'),
             'angkatan' => request('angkatan'),
             'semester' => request('semester'),
-            'kelas_id' => request('kelas_id'),
+            'fakultas_id' => request('fakultas_id'),
             'prodi_id' => request('prodi_id'),
         ]);
 
@@ -101,20 +101,22 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function show(Mahasiswa $mahasiswa)
+    public function showByNIM(Request $request, $NIM)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Mahasiswa $mahasiswa)
-    {
-        //
+        $mahasiswa = Mahasiswa::where('NIM', '=', $NIM);
+        if ($mahasiswa->count() != 0 && Mahasiswa::all()->count() != 0) {
+            return $this->sendResponse(
+                MahasiswaResource::collection($mahasiswa->get()),
+                'Get Detail Mahasiswa Successfully',
+                200
+            );
+        } else {
+            return $this->sendError(
+                'Get Detail Mahasiswa Fail',
+                ['Data mahasiswa is not found'],
+                400
+            );
+        }
     }
 
     /**
@@ -124,9 +126,39 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function updateByNIM(Request $request, $NIM)
     {
-        //
+        $mahasiswa = Mahasiswa::where('NIM', '=', $NIM);
+        if ($mahasiswa->count() != 0 && Mahasiswa::all()->count() != 0) {
+            $validator = Validator::make(request()->all(), [
+                'nama' => 'required',
+                'NIM' => 'required',
+                'email' => 'required|email',
+                'jenis_kelamin' => 'required',
+                'angkatan' => 'required',
+                'semester' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError(
+                    'Upload Data Fail',
+                    $validator->messages(),
+                    422
+                );
+            }
+            $mahasiswa->update($request->all());
+            return $this->sendResponse(
+                MahasiswaResource::collection($mahasiswa->get()),
+                'Update Data Mahasiswa Successfully',
+                200
+            );
+        } else {
+            return $this->sendError(
+                'Update Data Mahasiswa Fail',
+                ['Data mahasiswa is not found'],
+                400
+            );
+        }
     }
 
     /**

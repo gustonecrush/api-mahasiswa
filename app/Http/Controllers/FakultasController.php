@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ProgramStudiResource;
-use App\Models\ProgramStudi;
+use App\Http\Resources\FakultasResource;
+use App\Models\Fakultas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ProgramStudiController extends Controller
+class FakultasController extends Controller
 {
-    private $prodis;
+    private $fakultas;
 
     public function __construct()
     {
@@ -23,12 +23,12 @@ class ProgramStudiController extends Controller
      */
     public function index()
     {
-        $this->prodis = ProgramStudi::all();
-        $prodisResource = ProgramStudiResource::collection($this->prodis);
+        $this->fakultas = Fakultas::all();
+        $prodisResource = FakultasResource::collection($this->fakultas);
 
         return $this->sendResponse(
             $prodisResource,
-            'Successfully Get Program Studi',
+            'Successfully Get Fakultas',
             200
         );
     }
@@ -42,7 +42,7 @@ class ProgramStudiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make(request()->all(), [
-            'program_studi' => 'required',
+            'fakultas' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -53,19 +53,18 @@ class ProgramStudiController extends Controller
             );
         }
 
-        $prodi = ProgramStudi::create([
-            'program_studi' => request('program_studi'),
-            'fakultas_id' => request('fakultas_id'),
+        $fakultas = Fakultas::create([
+            'fakultas' => request('fakultas'),
         ]);
 
-        if ($prodi) {
+        if ($fakultas) {
             return $this->sendResponse(
-                new ProgramStudiResource($prodi),
+                new FakultasResource($fakultas),
                 'Upload Data Successfully',
                 200
             );
         } else {
-            return $this->sendError('Upload Data Fail', $prodi->fails(), 400);
+            return $this->sendError('Upload Data Fail', $fakultas->fails(), 400);
         }
     }
 }

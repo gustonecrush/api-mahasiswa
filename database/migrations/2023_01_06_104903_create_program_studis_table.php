@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('program_studis', function (Blueprint $table) {
             $table->id();
             $table->string('program_studi');
+            $table->foreignId('fakultas_id');
             $table->timestamps();
         });
     }

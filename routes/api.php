@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProgramStudiController;
@@ -33,8 +34,16 @@ Route::group(
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::post('me', [AuthController::class, 'me']);
         Route::resource('mahasiswa', MahasiswaController::class);
-        Route::resource('kelas', KelasController::class);
+        Route::resource('fakultas', FakultasController::class);
         Route::resource('prodi', ProgramStudiController::class);
+        Route::get('mahasiswa/{mahasiswa:nim}', [
+            MahasiswaController::class,
+            'showByNIM',
+        ]);
+        Route::post('mahasiswa/{mahasiswa:nim}', [
+            MahasiswaController::class,
+            'updateByNIM',
+        ]);
         Route::delete('mahasiswa/{mahasiswa:nim}', [
             MahasiswaController::class,
             'destroyByNIM',

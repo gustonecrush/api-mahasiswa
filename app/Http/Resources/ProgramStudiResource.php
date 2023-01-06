@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Fakultas;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProgramStudiResource extends JsonResource
