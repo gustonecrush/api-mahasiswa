@@ -25,7 +25,7 @@
   ```
   so your jwt secret is generated in .env file
 - After that, you can run command `php artisan migrate` to generate all table migrations which is exist in this project
-- Then, you can run command `php artisan db:seed` to seed your database with Material to materials table
+- Then, you can run command `php artisan db:seed` to seed your database with default data
 - Then, you can run command `php artisan serve` to start your laravel server and try the endpoint has been build
 
 ## AUTH ENDPOINT
