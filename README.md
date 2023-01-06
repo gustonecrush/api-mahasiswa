@@ -346,3 +346,134 @@ Response :
   "data": []
 }
 ```
+
+### Get Prodi
+
+Request :
+
+- Method : GET
+- Endpoint : `/api/prodi`
+- Header :
+  - Accept: application/json
+  - Autohorization: Bearer token
+
+Response :
+
+```json
+{
+  "status": "boolean",
+  "status_code": "integer",
+  "message": "string",
+  "data": [
+    {
+      "id": "integer",
+      "program_studi": "string",
+    },
+    ...
+  ]
+}
+```
+
+### Post Prodi
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/prodi`
+- Header :
+  - Accept: application/json
+  - Autohorization: Bearer token
+- Body :
+
+```json
+{
+    "program_studi": "string",
+    "fakultas_id": "integer",
+}
+```
+
+Response :
+
+```json
+{
+  "status": "boolean",
+  "status_code": "integer",
+  "message": "string",
+  "data": {
+        "id": "integer",
+        "program_studi": "string",
+   },
+}
+```
+
+### Get Fakultas
+
+Request :
+
+- Method : GET
+- Endpoint : `/api/fakultas`
+- Header :
+  - Accept: application/json
+  - Autohorization: Bearer token
+
+Response :
+
+```json
+{
+  "status": "boolean",
+  "status_code": "integer",
+  "message": "string",
+  "data": [
+    {
+      "id": "integer",
+      "fakultas": "string",
+      "program_studi": [
+        {
+           "id": "integer",
+           "program_studi": "string",
+        },
+        ...
+      ],
+    },
+    ...
+  ]
+}
+```
+
+### Post Fakultas
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/fakultas`
+- Header :
+  - Accept: application/json
+  - Autohorization: Bearer token
+- Body :
+
+```json
+{
+    "fakultas": "string",
+}
+```
+
+Response :
+
+```json
+{
+  "status": "boolean",
+  "status_code": "integer",
+  "message": "string",
+  "data": {
+      "id": "integer",
+      "fakultas": "string",
+      "program_studi": [
+        {
+           "id": "integer",
+           "program_studi": "string",
+        },
+        ...
+      ],
+  }
+}
+```
