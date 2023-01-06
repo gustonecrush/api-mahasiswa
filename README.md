@@ -229,7 +229,7 @@ Response :
 }
 ```
 
-## Delete Mahasiswa
+### Delete Mahasiswa
 
 Request :
 
