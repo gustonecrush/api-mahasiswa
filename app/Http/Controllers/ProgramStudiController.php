@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProgramStudiResource;
 use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProgramStudiController extends Controller
 {
+    private $prodis;
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => []]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +23,14 @@ class ProgramStudiController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $this->prodis = ProgramStudi::all();
+        $prodisResource = ProgramStudiResource::collection($this->prodis);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->sendResponse(
+            $prodisResource,
+            'Successfully Get Program Studi',
+            200
+        );
     }
 
     /**
@@ -35,51 +41,22 @@ class ProgramStudiController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validator = Validator::make(request()->all(), [
+            "program_studi"          => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ProgramStudi  $programStudi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ProgramStudi $programStudi)
-    {
-        //
-    }
+        if ($validator->fails()) {
+            return $this->sendError('Upload Data Fail', $validator->messages(), 422);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ProgramStudi  $programStudi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ProgramStudi $programStudi)
-    {
-        //
-    }
+        $prodi = ProgramStudi::create([
+            "program_studi"          => request('program_studi'),
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProgramStudi  $programStudi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ProgramStudi $programStudi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ProgramStudi  $programStudi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ProgramStudi $programStudi)
-    {
-        //
+        if ($prodi) {
+            return $this->sendResponse(new ProgramStudiResource($prodi), "Upload Data Successfully", 200);
+        } else {
+            return $this->sendError("Upload Data Fail", $prodi->fails(), 400);
+        }
     }
 }
