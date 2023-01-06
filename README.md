@@ -70,7 +70,7 @@ Response :
         },
       ],
       "created_at": "string",
-      "updated_at": "string,
+      "updated_at": "string",
     },
     ...
   ]
@@ -115,7 +115,7 @@ Response :
         },
       ],
       "created_at": "string",
-      "updated_at": "string,
+      "updated_at": "string",
     },
   ]
 }
@@ -170,7 +170,7 @@ Response :
        },
      ],
      "created_at": "string",
-     "updated_at": "string,
+     "updated_at": "string",
    },
 }
 ```
@@ -224,7 +224,7 @@ Response :
        },
      ],
      "created_at": "string",
-     "updated_at": "string,
+     "updated_at": "string",
    },
 }
 ```
