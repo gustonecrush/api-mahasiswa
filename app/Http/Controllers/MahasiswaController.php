@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MahasiswaResource;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MahasiswaController extends Controller
 {
+    private $mahasiswas;
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => []]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,14 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $this->mahasiswas = Mahasiswa::all();
+        $mahasiswaResource = MahasiswaResource::collection($this->mahasiswas);
+
+        return $this->sendResponse(
+            $mahasiswaResource,
+            'Successfully Get Mahasiswa',
+            200
+        );
     }
 
     /**
