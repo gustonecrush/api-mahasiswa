@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProgramStudi extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 
-    private $guarded = ['id'];
+    public function mahasiswas() {
+        return $this->hasMany('mahasiswas', 'prodi_id');
+    }
 }
