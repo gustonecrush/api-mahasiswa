@@ -8,7 +8,7 @@
 ## START PROJECT
 
 - Download this project and save to your local
-- Run `composer install` to install all dependencies neededa
+- Run `composer install` to install all dependencies needed
 - Open your computer server to run your server, then create new database on your database
 - Configure your .env file, go to database section, and configure the database according to the database you are using, the user, and the password you are using as below
   ```
