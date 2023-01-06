@@ -13,14 +13,19 @@
 - Configure your .env file, go to database section, and configure the database according to the database you are using, the user, and the password you are using as below
   ```
       DB_CONNECTION=mysql
-      DB_HOST=127.0.0.1
+      DB_HOST=your_host
       DB_PORT=your_port
       DB_DATABASE=your_db_name
       DB_USERNAME=your_username
       DB_PASSWORD=your_password
   ```
+- Run command `php artisan jwt:secret` to generate JWT key for authentication,
+  ```
+      JWT_SECRET=xxxx
+  ```
+  so your jwt secret is generated in .env file
 - After that, you can run command `php artisan migrate` to generate all table migrations which is exist in this project
-- Then, you can run command `php artisan db:seed --class=MaterialSeeder` to seed your database with Material to materials table
+- Then, you can run command `php artisan db:seed` to seed your database with Material to materials table
 - Then, you can run command `php artisan serve` to start your laravel server and try the endpoint has been build
 
 ## AUTH ENDPOINT
