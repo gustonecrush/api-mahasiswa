@@ -56,7 +56,7 @@ class AuthController extends Controller
     {
         // create validator to validate the request
         $validator = Validator::make(request()->all(), [
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
@@ -121,7 +121,7 @@ class AuthController extends Controller
             'expires_in' =>
                 auth()
                     ->factory()
-                    ->getTTL() * 60,
+                    ->getTTL() * 1000,
         ]);
     }
 }

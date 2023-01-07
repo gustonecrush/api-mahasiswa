@@ -34,8 +34,12 @@ Route::group(
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::post('me', [AuthController::class, 'me']);
         Route::resource('mahasiswa', MahasiswaController::class);
-        Route::resource('fakultas', FakultasController::class);
+        Route::resource('fakultas', FakultasController::class, ['except' => ['show']]);
         Route::resource('prodi', ProgramStudiController::class);
+        Route::get('fakultas/{fakultas:id}', [
+            FakultasController::class,
+            'getProdi',
+        ]);
         Route::get('mahasiswa/{mahasiswa:nim}', [
             MahasiswaController::class,
             'showByNIM',

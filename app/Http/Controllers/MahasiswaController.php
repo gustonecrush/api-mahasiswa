@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\MahasiswaResource;
+use App\Models\Fakultas;
 use App\Models\Mahasiswa;
+use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -22,26 +24,16 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->mahasiswas = Mahasiswa::all();
         $mahasiswaResource = MahasiswaResource::collection($this->mahasiswas);
-        
+
         return $this->sendResponse(
             $mahasiswaResource,
             'Successfully Get Mahasiswa',
             200
         );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -185,4 +177,21 @@ class MahasiswaController extends Controller
             );
         }
     }
+
+    public function convertProdi($prodi)
+    {
+        $prodiId = ProgramStudi::where(
+            'program_studi',
+            'like',
+            '%' . ucwords($prodi) . '%'
+        )
+            ->get(['id'])
+            ->toArray();
+        return $prodiId[0]['id'];
+    }
+
+    // public function convertFakultas($fakultas) {
+    //     $fakultasId = Fakultas::where('fakultas', 'like', "%$fakultas%")->get(["id"])->toArray();
+    //     return $fakultasId[0]["id"];
+    // }
 }

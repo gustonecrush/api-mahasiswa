@@ -24,10 +24,22 @@ class FakultasController extends Controller
     public function index()
     {
         $this->fakultas = Fakultas::all();
-        $prodisResource = FakultasResource::collection($this->fakultas);
+        $fakutasResource = FakultasResource::collection($this->fakultas);
 
         return $this->sendResponse(
-            $prodisResource,
+            $fakutasResource,
+            'Successfully Get Fakultas',
+            200
+        );
+    }
+
+    public function getProdi($id)
+    {
+        $fakultas = Fakultas::where('id', '=', $id)->get();
+        $fakutasResource = FakultasResource::collection($fakultas);
+
+        return $this->sendResponse(
+            $fakutasResource,
             'Successfully Get Fakultas',
             200
         );
